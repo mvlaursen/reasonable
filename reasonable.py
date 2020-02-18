@@ -3,18 +3,15 @@ import os
 import sys
 
 def main():
-    if len(sys.argv) != 2:
-        print("usage: " + os.path.basename(sys.argv[0]) + " <.csv file>")
+    if len(sys.argv) != 3:
+        print("usage: " + os.path.basename(sys.argv[0]) + " input-filepath.csv output-filepath.html")
     else:
-        filename = sys.argv[1]
-        print("Gonna go to town on: " + filename)
+        input_filepath = sys.argv[1]
 
-        with open(filename, 'r') as csvfile:
-            rows = []
-
-            csvreader = csv.DictReader(csvfile)
+        with open(input_filepath, 'r') as input_file:
+            csv_reader = csv.DictReader(input_file)
             print ("<html><body><ul>")
-            for row in csvreader:
+            for row in csv_reader:
                 print("<li><a href='" + row['article-link-href'] + "'>" + row['article-title'] + "</a> -- " + row['article-author'] + ": <i>" + row['article-subtitle'] + "</i></li>")
             print("</ul>")
             print("</body></html>")
