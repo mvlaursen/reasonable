@@ -1,6 +1,7 @@
 import csv
 import os
 import sys
+import webbrowser
 
 # These are the keys that the Firefox Web Scraper extension uses.
 # Some of them may come from Reason's HTML.
@@ -60,6 +61,8 @@ def main():
 
             with open(output_filepath, 'w', encoding='utf-8') as output_file:
                 write_html(articles, output_file)
+
+            webbrowser.get().open(output_filepath)
 
 if __name__ == "__main__":
     main()
