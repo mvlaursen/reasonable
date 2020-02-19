@@ -2,8 +2,21 @@ import csv
 import os
 import sys
 
+SCRAPER_AUTHOR_KEY = 'article-author'
+SCRAPER_HREF_KEY = 'article-link-href'
+SCRAPER_SUBTITLE_KEY = 'article-subtitle'
+SCRAPER_TITLE_KEY = 'article-title'
+
+AUTHOR_KEY = 'author'
+HREF_KEY = 'href'
+SUBTITLE_KEY = 'subtitle'
+TITLE_KEY = 'title'
+
 def write_li(article, output_file):
-    output_file.write("        <li><a href='" + article['href'] + "'>" + article['title'] + "</a> -- " + article['author'] + ": <i>" + article['subtitle'] + "</i></li>\n")
+    output_file.write("        <li><a href='" + article[HREF_KEY] + "'>"
+        + article[TITLE_KEY] + "</a> -- "
+        + article[AUTHOR_KEY] 
+        + ": <i>" + article[SUBTITLE_KEY] + "</i></li>\n")
 
 def write_html(articles, output_file):
     output_file.write("<!doctype html>\n")
@@ -35,10 +48,10 @@ def main():
             csv_reader = csv.DictReader(input_file)
             for row in csv_reader:
                 article = {}
-                article['author'] = row['article-author']
-                article['href'] = row['article-link-href']
-                article['title'] = row['article-title']
-                article['subtitle'] = row['article-subtitle']
+                article[AUTHOR_KEY] = row[SCRAPER_AUTHOR_KEY]
+                article[HREF_KEY] = row[SCRAPER_HREF_KEY]
+                article[SUBTITLE_KEY] = row[SCRAPER_SUBTITLE_KEY]
+                article[TITLE_KEY] = row[SCRAPER_TITLE_KEY]
                 articles.append(article)
 
             with open(output_filepath, 'w', encoding='utf-8') as output_file:
