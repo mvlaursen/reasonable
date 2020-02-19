@@ -4,12 +4,16 @@ import sys
 
 SCRAPER_AUTHOR_KEY = 'article-author'
 SCRAPER_HREF_KEY = 'article-link-href'
+SCRAPER_ORDER_KEY = '\ufeffweb-scraper-order'
 SCRAPER_SUBTITLE_KEY = 'article-subtitle'
+SCRAPER_TIME_KEY = 'article-datetime'
 SCRAPER_TITLE_KEY = 'article-title'
 
 AUTHOR_KEY = 'author'
 HREF_KEY = 'href'
+ORDER_KEY = 'order'
 SUBTITLE_KEY = 'subtitle'
+TIME_KEY = 'time'
 TITLE_KEY = 'title'
 
 def write_li(article, output_file):
@@ -50,12 +54,16 @@ def main():
                 article = {}
                 article[AUTHOR_KEY] = row[SCRAPER_AUTHOR_KEY]
                 article[HREF_KEY] = row[SCRAPER_HREF_KEY]
+                article[ORDER_KEY] = row[SCRAPER_ORDER_KEY]
                 article[SUBTITLE_KEY] = row[SCRAPER_SUBTITLE_KEY]
+                article[TIME_KEY] = row[SCRAPER_TIME_KEY]
                 article[TITLE_KEY] = row[SCRAPER_TITLE_KEY]
                 articles.append(article)
 
+            sorted_articles = sorted(articles, key = lambda i: (i[ORDER_KEY]), reverse=True)
+
             with open(output_filepath, 'w', encoding='utf-8') as output_file:
-                write_html(articles, output_file)
+                write_html(sorted_articles, output_file)
 
 if __name__ == "__main__":
     main()
