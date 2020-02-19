@@ -60,10 +60,10 @@ def main():
                 article[TITLE_KEY] = row[SCRAPER_TITLE_KEY]
                 articles.append(article)
 
-            sorted_articles = sorted(articles, key = lambda i: (i[ORDER_KEY]), reverse=True)
+            articles.sort(key = lambda i: (i[ORDER_KEY]), reverse=True)
 
             with open(output_filepath, 'w', encoding='utf-8') as output_file:
-                write_html(sorted_articles, output_file)
+                write_html(articles, output_file)
 
 if __name__ == "__main__":
     main()
