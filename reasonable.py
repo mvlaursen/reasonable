@@ -14,7 +14,7 @@ TITLE_KEY = 'article-title'
 
 def write_li(article, output_file):
     output_file.write("        <li><a href='" + article[HREF_KEY] + "'>"
-        + article[TITLE_KEY] + "</a> -- "
+        + article[TITLE_KEY] + "</a> &ndash;&ndash; "
         + article[AUTHOR_KEY] 
         + ": <i>" + article[SUBTITLE_KEY] + "</i></li>\n")
 
