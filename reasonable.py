@@ -12,13 +12,27 @@ SUBTITLE_KEY = 'article-subtitle'
 TIME_KEY = 'article-datetime'
 TITLE_KEY = 'article-title'
 
-def write_li(article, output_file):
+def maybeLinkAuthor(author):
+    if author == "Elizabeth Nolan Brown":
+        return "<a href='https://www.quora.com/profile/Elizabeth-Nolan-Brown'>Elizabeth Nolan Brown</a>"
+    elif author == "Jacob Sullum":
+        return "<a href='https://www.quora.com/profile/Jacob-Sullum-1'>Jacob Sullum</a>"
+    elif author == "John Stossel":
+        return "<a href='https://www.quora.com/topic/John-Stossel'>John Stossel</a>"
+    elif author == "Katherine Mangu-Ward":
+        return "<a href='https://www.quora.com/profile/Katherine-Mangu-Ward'>Katherine Mangu-Ward</a>"
+    elif author == "Nick Gillespie":
+        return "<a href='https://www.quora.com/profile/Nick-Gillespie-14'>Nick Gillespie</a>"
+    else:
+        return author
+
+def writeLi(article, output_file):
     output_file.write("        <li><a href='" + article[HREF_KEY] + "'>"
         + article[TITLE_KEY] + "</a> &ndash;&ndash; "
-        + article[AUTHOR_KEY] 
+        + maybeLinkAuthor(article[AUTHOR_KEY])
         + ": <i>" + article[SUBTITLE_KEY] + "</i></li>\n")
 
-def write_html(articles, output_file):
+def writeHtml(articles, output_file):
     output_file.write("<!doctype html>\n")
     output_file.write("<html lang='en'>\n")
     output_file.write("<head>\n")
@@ -28,7 +42,7 @@ def write_html(articles, output_file):
     output_file.write("    <ul>\n")
 
     for article in articles:
-        write_li(article, output_file)
+        writeLi(article, output_file)
 
     output_file.write("    </ul>\n")
     output_file.write("</body>\n")
@@ -60,7 +74,7 @@ def main():
             articles = filter(lambda i: (not i[TITLE_KEY].startswith(("Brickbat", "Review"))), articles)
 
             with open(output_filepath, 'w', encoding='utf-8') as output_file:
-                write_html(articles, output_file)
+                writeHtml(articles, output_file)
 
             webbrowser.get().open(output_filepath)
 
