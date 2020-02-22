@@ -13,7 +13,9 @@ TIME_KEY = 'article-datetime'
 TITLE_KEY = 'article-title'
 
 def maybeLinkAuthor(author):
-    if author == "Elizabeth Nolan Brown":
+    if author == "Christian Britschgi":
+        return "<a href='https://www.quora.com/profile/Christian-Britschgi'>Christian Britschgi</a>"
+    elif author == "Elizabeth Nolan Brown":
         return "<a href='https://www.quora.com/profile/Elizabeth-Nolan-Brown'>Elizabeth Nolan Brown</a>"
     elif author == "Jacob Sullum":
         return "<a href='https://www.quora.com/profile/Jacob-Sullum-1'>Jacob Sullum</a>"
@@ -23,6 +25,8 @@ def maybeLinkAuthor(author):
         return "<a href='https://www.quora.com/profile/Katherine-Mangu-Ward'>Katherine Mangu-Ward</a>"
     elif author == "Nick Gillespie":
         return "<a href='https://www.quora.com/profile/Nick-Gillespie-14'>Nick Gillespie</a>"
+    elif author == "Veronique de Rugy":
+        return "<a href='https://www.quora.com/profile/Veronique-De-Rugy'>Veronique de Rugy</a>"
     else:
         return author
 
